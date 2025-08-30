@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import RecipeCard from "./RecipeCard";
+import RecipeCard from './RecipeCard';
 
 const RecipeList = () => {
   return (
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     gap: 16,
   },
-})
+});
 
 export default RecipeList;

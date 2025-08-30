@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import DetailsPage from '../pages/DetailsPage';
 import FavoritesPage from '../pages/FavoritesPage';
 

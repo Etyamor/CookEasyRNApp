@@ -1,7 +1,13 @@
 ## Screenshots
 
 ### Login Page
-![Screenshot 2](screenshots/LoginPage.png)
+![Screenshot 1](screenshots/LoginPage.png)
+
+### Register Page
+![Screenshot 1](screenshots/RegisterPage.png)
+
+### Forgot Page
+![Screenshot 1](screenshots/RestorePage.png)
 
 ### Home Page
 ![Screenshot 1](screenshots/HomePage.png)

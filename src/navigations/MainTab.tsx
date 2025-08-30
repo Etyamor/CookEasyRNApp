@@ -42,7 +42,7 @@ const MainTab = () => {
         tabBarIcon: ({ color, size }) => getTabBarIcon(route.name, color, size),
         tabBarActiveTintColor: Colors.blue['500'],
         tabBarInactiveTintColor: Colors.dark['200'],
-        tabBarLabelPosition: 'below-icon'
+        tabBarLabelPosition: 'below-icon',
       })}
     >
       <Tab.Screen

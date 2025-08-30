@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
     gap: Spacing.xs,
   },
   title: {
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.inter, fontWeight: "700",
     fontSize: 14,
     color: Colors.dark['500'],
   },
   time: {
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.inter,
     fontSize: 12,
     color: Colors.dark['200'],
   },

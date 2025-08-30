@@ -7,11 +7,14 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import FormInput from "./FormInput";
-import FormButton from "./FormButton";
+import FormInput from './FormInput';
+import FormButton from './FormButton';
 import { Colors, Fonts, Spacing } from '../../theme';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginForm = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Image
@@ -21,13 +24,13 @@ const LoginForm = () => {
       <Text style={styles.title}>Welcome!</Text>
       <FormInput placeholder="Email Address" />
       <FormInput placeholder="Password" hide={true} />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('ForgotPage' as never)}>
         <Text style={styles.forgotPassword}>Forgot password?</Text>
       </TouchableOpacity>
       <FormButton title="Login" />
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>Not a member?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.reset({ index: 0, routes: [{ name: 'RegisterPage' as never }] })}>
           <Text style={styles.registerLink}>Register now</Text>
         </TouchableOpacity>
       </View>
@@ -49,13 +52,15 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.md,
   },
   title: {
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.inter,
+    fontWeight: '700',
     fontSize: 24,
   },
   forgotPassword: {
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.inter,
+    fontWeight: '700',
     fontSize: 12,
-    color: Colors.blue["500"]
+    color: Colors.blue['500'],
   },
   registerContainer: {
     flexDirection: 'row',
@@ -63,14 +68,15 @@ const styles = StyleSheet.create({
     gap: Spacing.xs,
   },
   registerText: {
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.inter,
     fontSize: 12,
-    color: Colors.dark["500"]
+    color: Colors.dark['500'],
   },
   registerLink: {
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.inter,
+    fontWeight: '700',
     fontSize: 12,
-    color: Colors.blue["500"]
+    color: Colors.blue['500'],
   },
 });
 

@@ -9,10 +9,8 @@ type SafeAreaLayoutProps = {
 
 const SafeAreaLayout = ({ children }: SafeAreaLayoutProps) => {
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']} >
-      <View style={styles.container}>
-        {children}
-      </View>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+      <View style={styles.container}>{children}</View>
     </SafeAreaView>
   );
 };

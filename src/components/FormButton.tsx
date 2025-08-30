@@ -1,5 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, Text, GestureResponderEvent, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  GestureResponderEvent,
+  StyleSheet,
+} from 'react-native';
 import { Colors, Fonts, Spacing } from '../../theme';
 
 type ButtonProps = {
@@ -8,7 +13,11 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
-const FormButton: React.FC<ButtonProps> = ({ title, onPress, disabled = false }) => {
+const FormButton: React.FC<ButtonProps> = ({
+  title,
+  onPress,
+  disabled = false,
+}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -24,16 +33,17 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: Spacing.md,
     paddingVertical: 12,
-    backgroundColor: Colors.blue["500"],
+    backgroundColor: Colors.blue['500'],
     borderRadius: 12,
   },
   disabledButton: {
-    backgroundColor: Colors.blue["300"]
+    backgroundColor: Colors.blue['300'],
   },
   text: {
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.inter,
+    fontWeight: '700',
     fontSize: 12,
-    color: Colors.light["100"],
+    color: Colors.light['100'],
     textAlign: 'center',
   },
 });

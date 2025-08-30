@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TextInputProps, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  TextInputProps,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Colors, Fonts, Spacing } from '../../theme';
 
@@ -9,7 +16,10 @@ type FormInputProps = {
   value: string;
   onChangeText: (text: string) => void;
   hide?: boolean;
-} & Omit<TextInputProps, 'value' | 'onChangeText' | 'placeholder' | 'secureTextEntry'>;
+} & Omit<
+  TextInputProps,
+  'value' | 'onChangeText' | 'placeholder' | 'secureTextEntry'
+>;
 
 const FormInput: React.FC<FormInputProps> = ({
   label,
@@ -23,9 +33,7 @@ const FormInput: React.FC<FormInputProps> = ({
 
   return (
     <View style={styles.container}>
-      {!!label && (
-        <Text style={styles.label}>{label}</Text>
-      )}
+      {!!label && <Text style={styles.label}>{label}</Text>}
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -39,7 +47,7 @@ const FormInput: React.FC<FormInputProps> = ({
         {hide && (
           <TouchableOpacity
             style={styles.iconButton}
-            onPress={() => setIsHidden((prev) => !prev)}
+            onPress={() => setIsHidden(prev => !prev)}
             activeOpacity={0.7}
           >
             {isHidden ? (
@@ -59,9 +67,9 @@ const styles = StyleSheet.create({
     gap: Spacing.sm,
   },
   label: {
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.inter,
     fontSize: 14,
-    color: Colors.dark["500"],
+    color: Colors.dark['500'],
   },
   inputContainer: {
     position: 'relative',
@@ -71,11 +79,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingRight: 40,
     borderRadius: 12,
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.inter,
     fontSize: 14,
-    color: Colors.dark["500"],
+    color: Colors.dark['500'],
     borderWidth: 1,
-    borderColor: Colors.light["500"]
+    borderColor: Colors.light['500'],
   },
   iconButton: {
     position: 'absolute',

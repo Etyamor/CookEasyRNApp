@@ -46,6 +46,5 @@ export const Colors = {
 };
 
 export const Fonts = {
-  regular: "Inter 24pt Regular",
-  bold: "Inter 24pt Bold",
+  inter: "Inter 24pt",
 }

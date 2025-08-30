@@ -7,8 +7,15 @@ type SafeAreaLayoutProps = {
   verticalPadding?: number;
 };
 
-const NoSafeAreaLayout = ({ children, verticalPadding = Spacing.md }: SafeAreaLayoutProps) => {
-  return <View style={[styles.container, { paddingVertical: verticalPadding }]}>{children}</View>;
+const NoSafeAreaLayout = ({
+  children,
+  verticalPadding = Spacing.md,
+}: SafeAreaLayoutProps) => {
+  return (
+    <View style={[styles.container, { paddingVertical: verticalPadding }]}>
+      {children}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -16,7 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.md,
     gap: Spacing.md,
-    backgroundColor: Colors.light["100"],
+    backgroundColor: Colors.light['100'],
   },
 });
 

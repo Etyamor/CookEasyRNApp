@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     color: Colors.dark['500'],
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.inter,
   },
 });
 
