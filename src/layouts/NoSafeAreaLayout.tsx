@@ -4,17 +4,17 @@ import { Colors, Spacing } from '../../theme';
 
 type SafeAreaLayoutProps = {
   children: ReactNode;
+  verticalPadding?: number;
 };
 
-const NoSafeAreaLayout = ({ children }: SafeAreaLayoutProps) => {
-  return <View style={styles.container}>{children}</View>;
+const NoSafeAreaLayout = ({ children, verticalPadding = Spacing.md }: SafeAreaLayoutProps) => {
+  return <View style={[styles.container, { paddingVertical: verticalPadding }]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.md,
     gap: Spacing.md,
     backgroundColor: Colors.light["100"],
   },
