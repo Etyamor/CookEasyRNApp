@@ -11,6 +11,7 @@ import FormInput from './FormInput';
 import FormButton from './FormButton';
 import { Colors, Fonts, Spacing } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../constants';
 
 const LoginForm = () => {
   const navigation = useNavigation();
@@ -29,7 +30,7 @@ const LoginForm = () => {
       <FormButton title="Sign up" />
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>Already have account?</Text>
-        <TouchableOpacity onPress={() => navigation.reset({ index: 0, routes: [{ name: 'LoginPage' as never }] })}>
+        <TouchableOpacity onPress={() => navigation.reset({ index: 0, routes: [{ name: SCREENS.LOGIN as never }] })}>
           <Text style={styles.registerLink}>Login now</Text>
         </TouchableOpacity>
       </View>

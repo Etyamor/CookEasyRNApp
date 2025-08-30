@@ -9,7 +9,7 @@ import AuthStack from './src/navigations/AuthStack';
 enableScreens(false);
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, _] = useState(true);
 
   return (
     <SafeAreaProvider>

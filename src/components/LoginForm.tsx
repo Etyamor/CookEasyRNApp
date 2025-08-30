@@ -11,6 +11,7 @@ import FormInput from './FormInput';
 import FormButton from './FormButton';
 import { Colors, Fonts, Spacing } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../constants';
 
 const LoginForm = () => {
   const navigation = useNavigation();
@@ -24,13 +25,13 @@ const LoginForm = () => {
       <Text style={styles.title}>Welcome!</Text>
       <FormInput placeholder="Email Address" />
       <FormInput placeholder="Password" hide={true} />
-      <TouchableOpacity onPress={() => navigation.navigate('ForgotPage' as never)}>
+      <TouchableOpacity onPress={() => navigation.navigate(SCREENS.FORGOT as never)}>
         <Text style={styles.forgotPassword}>Forgot password?</Text>
       </TouchableOpacity>
       <FormButton title="Login" />
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>Not a member?</Text>
-        <TouchableOpacity onPress={() => navigation.reset({ index: 0, routes: [{ name: 'RegisterPage' as never }] })}>
+        <TouchableOpacity onPress={() => navigation.reset({ index: 0, routes: [{ name: SCREENS.REGISTER as never }] })}>
           <Text style={styles.registerLink}>Register now</Text>
         </TouchableOpacity>
       </View>

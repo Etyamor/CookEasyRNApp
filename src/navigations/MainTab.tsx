@@ -8,6 +8,7 @@ import Ionicons from '@react-native-vector-icons/ionicons';
 import { Colors } from '../../theme';
 import HomeStack from './HomeStack';
 import FavoriteStack from './FavoriteStack';
+import { SCREENS, STACKS } from '../constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,13 +20,13 @@ function getTabBarIcon(routeName: string, color: string, size: number) {
     | 'alert-circle-outline';
 
   switch (routeName) {
-    case 'Home':
+    case STACKS.HOME:
       iconName = 'home-outline';
       break;
-    case 'Add':
+    case SCREENS.ADD:
       iconName = 'add-circle-outline';
       break;
-    case 'Favorites':
+    case STACKS.FAVORITES:
       iconName = 'heart-outline';
       break;
     default:
@@ -46,15 +47,15 @@ const MainTab = () => {
       })}
     >
       <Tab.Screen
-        name="Home"
+        name={STACKS.HOME}
         component={HomeStack}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: 'Home' }}
       />
-      <Tab.Screen name="Add" component={AddPage} />
+      <Tab.Screen name={SCREENS.ADD} component={AddPage} options={{ title: 'Add' }} />
       <Tab.Screen
-        name="Favorites"
+        name={STACKS.FAVORITES}
         component={FavoriteStack}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: 'Favorites' }}
       />
     </Tab.Navigator>
   );
