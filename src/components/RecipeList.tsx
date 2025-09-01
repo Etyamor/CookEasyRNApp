@@ -1,17 +1,17 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import RecipeCard from './RecipeCard';
+import { Spacing } from '../../theme';
 
-const RecipeList = () => {
+const RecipeList = ({ data }: any) => {
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.cardContainer}>
-          {Array.from({ length: 12 }, (_, index) => (
-            <RecipeCard key={index} />
-          ))}
-        </View>
-      </ScrollView>
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        contentContainerStyle={styles.cardContainer}
+        renderItem={({ item }) => <RecipeCard recipe={item} />}
+      />
     </View>
   );
 };
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardContainer: {
-    gap: 16,
+    gap: Spacing.md,
   },
 });
 

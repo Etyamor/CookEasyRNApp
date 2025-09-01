@@ -3,12 +3,14 @@ import { Image, View, Text, StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Colors, Fonts, Spacing } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../constants';
 
-const RecipeCard = () => {
+const RecipeCard = ({ recipe }: any) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('DetailsPage');
+    // @ts-ignore
+    navigation.navigate(SCREENS.DETAILS as never, { recipe: recipe } as never);
   };
 
   return (
@@ -20,11 +22,13 @@ const RecipeCard = () => {
             style={styles.image}
           />
         </View>
+
         <View style={styles.contentRow}>
           <View style={styles.textContainer}>
-            <Text style={styles.title}>Recipe Title</Text>
-            <Text style={styles.time}>20 min</Text>
+            <Text style={styles.title}>{recipe.name || recipe.title}</Text>
+            <Text style={styles.time}>{(recipe.time || recipe.duration || recipe.cookingTime) ? `${recipe.time || recipe.duration || recipe.cookingTime} min` : ''}</Text>
           </View>
+
           <Ionicons name="chevron-forward" size={20} color="#8F9098" />
         </View>
       </View>
@@ -58,7 +62,8 @@ const styles = StyleSheet.create({
     gap: Spacing.xs,
   },
   title: {
-    fontFamily: Fonts.inter, fontWeight: "700",
+    fontFamily: Fonts.inter,
+    fontWeight: '700',
     fontSize: 14,
     color: Colors.dark['500'],
   },
