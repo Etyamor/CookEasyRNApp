@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Tag from '../components/Tag';
 import NoSafeAreaLayout from '../layouts/NoSafeAreaLayout';
@@ -32,29 +26,32 @@ const DetailsPage = () => {
             <View>
               <Text style={styles.h2}>Ingredients</Text>
               <View>
-                {(recipe.ingredients.map((item: string, idx: number) => (
-                  <Text key={item + idx} style={styles.p}>{`\u2022`} {item}</Text>
-                )))}
+                {recipe.ingredients.map((item: string, idx: number) => (
+                  <Text key={item + idx} style={styles.p}>
+                    {`\u2022`} {item}
+                  </Text>
+                ))}
+              </View>
+            </View>
+          )}
+          {!!recipe.steps && recipe.steps.length > 0 && (
+            <View style={[styles.container, styles.stepsContainer]}>
+              <Text style={styles.h2}>Steps</Text>
+              <View>
+                {recipe.steps.map((item: string, idx: number) => (
+                  <View key={item + idx} style={{ marginBottom: Spacing.sm }}>
+                    <Text style={styles.h3}>{`Step ${idx + 1}`}</Text>
+                    <Text style={styles.p}>{item}</Text>
+                  </View>
+                ))}
               </View>
             </View>
           )}
         </View>
-        {!!recipe.steps && recipe.steps.length > 0 && (
-          <View style={[styles.container, styles.stepsContainer]}>
-            <Text style={styles.h2}>Steps</Text>
-            <View>
-              {(recipe.steps.map((item: string, idx: number) => (
-                <View key={item + idx} style={{ marginBottom: Spacing.sm }}>
-                  <Text style={styles.h3}>{`Step ${idx + 1}`}</Text>
-                  <Text style={styles.p}>{item}</Text>
-                </View>
-              )))}
-            </View>
-          </View>
-        )}
       </ScrollView>
     </NoSafeAreaLayout>
-  )};
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -86,8 +83,8 @@ const styles = StyleSheet.create({
   p: {
     fontFamily: Fonts.inter,
     fontSize: 12,
-    color: Colors.dark["200"],
-    textAlign: 'justify'
+    color: Colors.dark['200'],
+    textAlign: 'justify',
   },
   stepsContainer: {
     gap: Spacing.md,
@@ -96,8 +93,8 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.inter,
     fontSize: 14,
     marginBottom: Spacing.xs,
-    color: Colors.dark["500"]
-  }
+    color: Colors.dark['500'],
+  },
 });
 
 export default DetailsPage;
