@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ScrollView,
   View,
@@ -6,23 +6,33 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Colors } from '../../theme';
+import { setCategory, selectActiveCategory } from '../store/recipesSlice';
 
 const categories = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Drinks'];
 
 const Categories = () => {
-  const [selected, setSelected] = useState('All');
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector(selectActiveCategory);
+
+  const handleCategorySelect = (category: string) => {
+    dispatch(setCategory(category));
+  };
 
   return (
     <View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {categories.map((category, idx) => (
-          <TouchableOpacity key={idx} onPress={() => setSelected(category)}>
+          <TouchableOpacity
+            key={idx}
+            onPress={() => handleCategorySelect(category)}
+          >
             <View>
               <Text
                 style={[
                   styles.categoryText,
-                  selected === category
+                  selectedCategory === category
                     ? styles.selectedCategory
                     : styles.unselectedCategory,
                 ]}

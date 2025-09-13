@@ -4,12 +4,12 @@ import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import RecipeList from '../components/RecipeList';
 import SafeAreaLayout from '../layouts/SafeAreaLayout';
-import { fetchRecipes, selectAllRecipes } from '../store/recipesSlice';
+import { fetchRecipes, selectFilteredRecipes } from '../store/recipesSlice';
 import { RootState } from '../store';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector((state: RootState) => selectAllRecipes(state));
+  const filteredRecipes = useSelector((state: RootState) => selectFilteredRecipes(state));
 
   useEffect(() => {
     // @ts-ignore
@@ -20,7 +20,7 @@ const HomePage = () => {
     <SafeAreaLayout>
       <SearchBar />
       <Categories />
-      <RecipeList data={recipes} />
+      <RecipeList data={filteredRecipes} />
     </SafeAreaLayout>
   );
 };
