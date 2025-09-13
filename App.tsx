@@ -6,6 +6,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AuthStack from "./src/navigations/AuthStack";
 import { AppProvider, useApp } from "./src/context/AppContext";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Provider } from 'react-redux';
+import { store } from "./src/store";
 
 enableScreens(false);
 
@@ -23,13 +25,15 @@ function App() {
   //AsyncStorage.removeItem("user");
 
   return (
-    <AppProvider>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </AppProvider>
+    <Provider store={store}>
+      <AppProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </AppProvider>
+    </Provider>
   );
 }
 

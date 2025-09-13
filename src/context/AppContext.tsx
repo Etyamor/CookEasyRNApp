@@ -1,10 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-  getRecipes,
   loginUser,
-  addFavorite,
-  removeFavorite,
   registerUser,
 } from '../api';
 
@@ -17,37 +14,19 @@ interface User {
   favorites?: string[];
 }
 
-interface Recipe {
-  id: string;
-  name: string;
-  category: string;
-  time: number;
-  image?: string;
-  ingredients: string[];
-  steps: string[];
-}
-
 interface AppContextType {
   user: User | null;
-  recipes: Recipe[];
-  favorites: string[];
   loading: boolean;
   initializing: boolean;
   login: (username: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string, confirm_password: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshRecipes: () => Promise<void>;
-  addToFavorites: (recipeId: string) => Promise<void>;
-  removeFromFavorites: (recipeId: string) => Promise<void>;
-  toggleFavorite: (recipeId: string) => Promise<void>;
-  getFavorites: () => Recipe[];
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(false);
   const [initializing, setInitializing] = useState(true);
 
@@ -90,61 +69,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     await AsyncStorage.removeItem("user");
   };
 
-  const refreshRecipes = async () => {
-    setLoading(true);
-    try {
-      const res = await getRecipes();
-      setRecipes(res.data);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const addToFavorites = async (recipeId: string) => {
-    if (!user) return;
-    const updated = await addFavorite(user.id, recipeId);
-    setUser(updated.data);
-    await AsyncStorage.setItem("user", JSON.stringify(updated.data));
-  };
-
-  const removeFromFavorites = async (recipeId: string) => {
-    if (!user) return;
-    const updated = await removeFavorite(user.id, recipeId);
-    setUser(updated.data);
-    await AsyncStorage.setItem("user", JSON.stringify(updated.data));
-  };
-
-  const toggleFavorite = async (recipeId: string) => {
-    if (!user) return;
-    const isFav = user.favorites?.includes(recipeId);
-    if (isFav) {
-      await removeFromFavorites(recipeId);
-    } else {
-      await addToFavorites(recipeId);
-    }
-  };
-
-  const getFavorites = () => {
-    if (!user || !recipes.length) return [];
-    return recipes.filter(r => user.favorites?.includes(r.id));
-  }
-
   return (
     <AppContext.Provider
       value={{
         user,
-        recipes,
-        favorites: user?.favorites || [],
         loading,
         initializing,
         login,
         register,
         logout,
-        refreshRecipes,
-        addToFavorites,
-        removeFromFavorites,
-        toggleFavorite,
-        getFavorites,
       }}
     >
       {children}

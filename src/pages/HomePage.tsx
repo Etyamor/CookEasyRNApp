@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import RecipeList from '../components/RecipeList';
 import SafeAreaLayout from '../layouts/SafeAreaLayout';
-import { useApp } from '../context/AppContext';
+import { fetchRecipes, selectAllRecipes } from '../store/recipesSlice';
+import { RootState } from '../store';
 
 const HomePage = () => {
-  const { recipes, refreshRecipes } = useApp();
+  const dispatch = useDispatch();
+  const recipes = useSelector((state: RootState) => selectAllRecipes(state));
 
   useEffect(() => {
-    refreshRecipes();
-  }, []);
+    // @ts-ignore
+    dispatch(fetchRecipes());
+  }, [dispatch]);
 
   return (
     <SafeAreaLayout>
