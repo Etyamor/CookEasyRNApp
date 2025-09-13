@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Colors } from '../../theme';
 import { setCategory, selectActiveCategory } from '../store/recipesSlice';
 
-const categories = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Drinks'];
+const categories = ['All', 'category 1', 'category 2', 'Dinner', 'Dessert', 'Drinks'];
 
 const Categories = () => {
   const dispatch = useDispatch();

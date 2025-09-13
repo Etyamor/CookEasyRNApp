@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
 import { addFavorite, removeFavorite, getUserById } from '../api';
 import { RootState } from '.';
 
@@ -115,25 +116,27 @@ const favoritesSlice = createSlice({
 
 export const { clearFavorites, setFavoritesSearchQuery, updateFilteredFavorites } = favoritesSlice.actions;
 
-// Selectors
+// Basic selectors (these don't create new references)
 export const selectFavoriteIds = (state: RootState) => state.favorites.ids;
 export const selectFilteredFavoriteIds = (state: RootState) => state.favorites.filteredIds;
 export const selectFavoriteLoading = (state: RootState) => state.favorites.loading;
 export const selectFavoritesSearchQuery = (state: RootState) => state.favorites.searchQuery;
+export const selectAllRecipesForFavorites = (state: RootState) => state.recipes.allItems;
 
-// Get all favorite recipes
-export const selectFavoriteRecipes = (state: RootState) => {
-  const favoriteIds = state.favorites.ids;
-  return state.recipes.allItems.filter(recipe => favoriteIds.includes(recipe.id));
-};
+// Memoized selectors (these return new object references and need memoization)
+export const selectFavoriteRecipes = createSelector(
+  [selectFavoriteIds, selectAllRecipesForFavorites],
+  (favoriteIds, allRecipes) => allRecipes.filter(recipe => favoriteIds.includes(recipe.id))
+);
 
-// Get filtered favorite recipes based on search
-export const selectFilteredFavoriteRecipes = (state: RootState) => {
-  const filteredIds = state.favorites.filteredIds;
-  return state.recipes.allItems.filter(recipe => filteredIds.includes(recipe.id));
-};
+export const selectFilteredFavoriteRecipes = createSelector(
+  [selectFilteredFavoriteIds, selectAllRecipesForFavorites],
+  (filteredIds, allRecipes) => allRecipes.filter(recipe => filteredIds.includes(recipe.id))
+);
 
-export const selectIsFavorite = (state: RootState, recipeId: string) =>
-  state.favorites.ids.includes(recipeId);
+export const selectIsFavorite = createSelector(
+  [selectFavoriteIds, (state: RootState, recipeId: string) => recipeId],
+  (favoriteIds, recipeId) => favoriteIds.includes(recipeId)
+);
 
 export default favoritesSlice.reducer;

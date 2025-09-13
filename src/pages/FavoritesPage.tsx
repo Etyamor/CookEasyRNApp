@@ -13,7 +13,6 @@ const FavoritesPage = () => {
   const { user } = useApp();
   const allRecipes = useSelector(selectAllRecipes);
   const favoriteRecipes = useSelector((state: RootState) => selectFilteredFavoriteRecipes(state));
-  const loading = useSelector((state: RootState) => state.favorites.loading);
 
   useEffect(() => {
     if (user) {
