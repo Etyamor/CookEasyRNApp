@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { createSelector } from '@reduxjs/toolkit';
 import { getRecipes, getRecipeById } from '../api';
 import { RootState } from '.';
 
@@ -163,26 +162,15 @@ export const {
   clearFilters
 } = recipesSlice.actions;
 
-// Basic selectors (these don't create new references)
+// Export selectors
 export const selectAllRecipes = (state: RootState) => state.recipes.allItems;
-export const selectFilteredItems = (state: RootState) => state.recipes.filteredItems;
+export const selectFilteredRecipes = (state: RootState) => state.recipes.filteredItems;
 export const selectRecipeLoading = (state: RootState) => state.recipes.loading;
 export const selectRecipeError = (state: RootState) => state.recipes.error;
 export const selectSelectedRecipe = (state: RootState) => state.recipes.selectedRecipe;
 export const selectActiveCategory = (state: RootState) => state.recipes.activeCategory;
 export const selectSearchQuery = (state: RootState) => state.recipes.searchQuery;
-
-// Memoized selectors
-export const selectFilteredRecipes = createSelector(
-  [selectAllRecipes, selectActiveCategory, selectSearchQuery],
-  (allRecipes, activeCategory, searchQuery) => {
-    return applyFilters(allRecipes, activeCategory, searchQuery);
-  }
-);
-
-export const selectRecipeById = createSelector(
-  [selectAllRecipes, (state: RootState, recipeId: string) => recipeId],
-  (allRecipes, recipeId) => allRecipes.find(recipe => recipe.id === recipeId)
-);
+export const selectRecipeById = (state: RootState, recipeId: string) =>
+  state.recipes.allItems.find(recipe => recipe.id === recipeId);
 
 export default recipesSlice.reducer;
