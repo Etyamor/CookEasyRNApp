@@ -1,13 +1,4 @@
-import axios from "axios";
-
-const API_BASE_URL = "https://68b462ba45c9016787703c96.mockapi.io";
-
-export const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { api } from "./services/apiClient";
 
 export const getUsers = () => api.get("/users");
 
@@ -38,7 +29,7 @@ export const createRecipe = (data: { title: string; description: string; image?:
 export const addFavorite = async (userId: string, recipeId: string) => {
   const { data: user } = await getUserById(userId);
   const favorites = user.favorites || [];
-  if (favorites.includes(recipeId)) return user;
+  if (favorites.includes(recipeId)) return { data: user };
   const updated = { ...user, favorites: [...favorites, recipeId] };
   return updateUser(userId, updated);
 };

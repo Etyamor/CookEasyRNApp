@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import RecipeCard from './RecipeCard';
 import { Spacing } from '../../theme';
 
 const RecipeList = ({ data }: any) => {
+  const renderItem = useCallback(({ item }) => <RecipeCard recipe={item} />, []);
+
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.cardContainer}
-        renderItem={({ item }) => <RecipeCard recipe={item} />}
+        renderItem={renderItem}
       />
     </View>
   );
