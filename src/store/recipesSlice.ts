@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { getRecipes, getRecipeById } from '../api';
+import { getRecipes, getRecipeById, createRecipe as apiCreateRecipe } from '../api';
 import { RootState } from '.';
 
 export interface Recipe {
@@ -44,6 +44,21 @@ export const fetchRecipeById = createAsyncThunk(
   'recipes/fetchRecipeById',
   async (id: string) => {
     const response = await getRecipeById(id);
+    return response.data;
+  }
+);
+
+export const createRecipeThunk = createAsyncThunk(
+  'recipes/createRecipe',
+  async (recipe: {
+    name: string;
+    category: string;
+    time: number;
+    ingredients: string[];
+    steps: string[];
+    image?: string;
+  }) => {
+    const response = await apiCreateRecipe(recipe);
     return response.data;
   }
 );
@@ -150,6 +165,10 @@ const recipesSlice = createSlice({
       .addCase(fetchRecipeById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch recipe';
+      })
+      .addCase(createRecipeThunk.fulfilled, (state, action) => {
+        state.allItems.push(action.payload);
+        state.filteredItems.push(action.payload);
       });
   },
 });
@@ -172,5 +191,7 @@ export const selectActiveCategory = (state: RootState) => state.recipes.activeCa
 export const selectSearchQuery = (state: RootState) => state.recipes.searchQuery;
 export const selectRecipeById = (state: RootState, recipeId: string) =>
   state.recipes.allItems.find(recipe => recipe.id === recipeId);
+
+export { fetchRecipes, fetchRecipeById, createRecipeThunk };
 
 export default recipesSlice.reducer;

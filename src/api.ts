@@ -23,8 +23,14 @@ export const getRecipes = () => api.get("/recipes");
 
 export const getRecipeById = (id: string) => api.get(`/recipes/${id}`);
 
-export const createRecipe = (data: { title: string; description: string; image?: string }) =>
-  api.post("/recipes", data);
+export const createRecipe = (data: {
+  name: string;
+  category: string;
+  time: number;
+  ingredients: string[];
+  steps: string[];
+  image?: string;
+}) => api.post("/recipes", data);
 
 export const addFavorite = async (userId: string, recipeId: string) => {
   const { data: user } = await getUserById(userId);
